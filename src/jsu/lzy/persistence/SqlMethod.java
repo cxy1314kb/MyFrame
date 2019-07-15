@@ -204,7 +204,6 @@ public abstract class SqlMethod<T> {
 			// 获取列明
 			String coloumNmae = annotation.name();
 			// 拼接要查询的列，代替*
-			coloumNames.append(coloumNmae + ",");
 			try {
 				// 如果值为空则为默认不以此为查询条件,注意int为0时默认为空-加：如果是int型且值为0则也为空
 				if (null != field.get(t)) {
@@ -213,6 +212,7 @@ public abstract class SqlMethod<T> {
 					if (field.getType().toString().equals("int") ? 0 == (int) field.get(t) : false)
 						continue;
 					// 以有非空属性
+					coloumNames.append(coloumNmae + ",");
 					sqlColoumNotNull.append("?,");
 					placeholder.add(field.get(t));
 				}
